@@ -1,0 +1,163 @@
+@charset "utf-8";
+/* CSS Document */
+body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, b, small, u, i, center, dl, dt, dd, ol, ul, li,  sub, sup, tt, var, del, dfn,  ins, kbd, q, s, samp,  strike, applet, object, iframe, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, blockquote, pre, a, abbr, acronym, address, big, cite, code, mark, audio, video, input, textarea, select { margin:0; padding:0;}	
+
+/*a 链接*/
+a { text-decoration:none; outline:none; blr:expression(this.onFocus=this.blur()); }
+a:link { color: #000;}
+a:visited { color: #000; }
+a:hover, a:active, a:focus {  color: #f35d34; }
+img {border: none;}
+
+.error404 {
+	width: 1260px;
+	margin: 0 auto;
+	font-size:12px; font-family:Arial,Microsoft YaHei,SimSun;
+}
+.error404 .info {
+	width: 68%;
+	float: left;
+	padding-left: 2%;
+}
+.error404 .info h1 {
+	font-size: 102px;
+	font-weight: 700;
+	margin-top: 130px;
+	line-height: 105px;
+	color: #f35d34;
+	text-transform: uppercase;
+}
+.error404 .info h2 {
+	font-size: 33px;
+	line-height: 33px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.error404 .info p.p1 {
+	font-size: 12px;
+}
+
+.error404 .info .menu {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 300;
+	color: #000000;
+	text-transform: uppercase;
+	margin: 15px 0;
+}
+.error404 .info .menu a {
+	white-space: nowrap;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.error404 .info .btn {
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff;
+	border: 0px solid;
+	border-bottom: 2px solid;
+	border-color: #ef6d00;
+	padding: 10px 41px;
+	border-radius: 5px;
+	background: none;
+	text-transform: uppercase;
+	display: inline-block;
+	margin: 20px 20px 0 0;
+	background-color: #ff8000;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	text-decoration: none;
+	cursor: pointer;
+}
+.error404 .info .btn:hover {
+	background: #ef6d00;
+	color: #ffffff;
+	text-decoration: none;
+}
+.error404 .info .btn-brown {
+	border-color: #7b7b7b;
+	background-color: #9f9f9f;
+}
+.error404 .info .btn-brown:hover {
+	background: #7b7b7b;
+}
+.error404 .pic {
+	width: 30%;
+	float: right;
+	margin-top: 70px;
+	text-align: right;
+}
+.error404 .pic img {
+	max-width: 350px;
+}
+
+
+
+@media (max-width:1280px ) {
+	.error404 {
+		width: 100%;
+	}
+	.error404 .info {
+		width:65%;
+	}
+	.error404 .pic {
+		width: 33%;
+		margin-top: 100px;
+	}
+	.error404 .pic img {
+		max-width: 318px
+	}
+	.error404 .info h2 {
+		font-size: 30px;
+	}
+}
+
+@media (max-width:1050px ) {
+	.error404 {
+		width: 100%;
+	}
+	.error404 .info {
+		width: 60%;
+	}
+	.error404 .pic {
+		width: 38%;
+	}
+	.error404 .info h1 {
+		font-size: 98px;
+	}
+	.error404 .info h2 {
+		font-size: 23px;
+	}
+	.error404 .pic img {
+		max-width: 280px;
+		margin-top: 40px;
+	}
+}
+
+@media (max-width:768px ) {
+	.error404 {
+		width: 100%;
+		text-align: center;
+	}
+	.error404 .info {
+		width: 98%;
+		padding-left:1%;
+		padding-right: 1%;
+		clear: both;
+	}
+	.error404 .info h1 {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.error404 .pic {
+		width: 100%;
+		clear: both;
+		text-align: center;
+		margin-top: 0;
+	}
+}

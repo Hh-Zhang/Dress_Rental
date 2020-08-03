@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dress_rental.dao.WeddingDao">
+	<resultMap id="BaseResultMap" type="com.dress_rental.entities.Wedding">
+		<id column="Id" jdbcType="INTEGER" property="Id" />
+		<result column="weddingName" jdbcType="VARCHAR" property="weddingName" />
+		<result column="weddingPicture" jdbcType="VARCHAR" property="weddingPicture" />
+		<result column="weddingStyle" jdbcType="VARCHAR" property="weddingStyle" />
+		<result column="weddingPrice" jdbcType="VARCHAR" property="weddingPrice" />
+		<result column="weddingDeposit" jdbcType="VARCHAR" property="weddingDeposit" />
+		<result column="rentalStatus" jdbcType="VARCHAR" property="rentalStatus" />
+		<result column="promotion" jdbcType="VARCHAR" property="promotion" />
+	</resultMap>
+<!--后台婚纱列表-->
+	<select id="qrylistWedding" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd, Id,weddingName,weddingPicture,
+		CASE weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,weddingPrice,weddingDeposit,
+		CASE rentalStatus
+		WHEN 0 THEN '未租出'
+		WHEN 1 THEN '已租出'
+		END AS rentalStatus,
+		CASE promotion
+		WHEN 0 THEN '否'
+		ELSE '是'
+		END AS promotion
+		FROM wedding,(SELECT @i:=0) AS idd WHERE 1=1
+		<if test="id != null and id != ''">
+			AND Id = #{Id}
+		</if>
+		<if test="weddingName != null and weddingName != ''">
+			AND weddingName like replace(CONCAT(CONCAT('%', #{weddingName}), '%'),'
+			','')
+		</if>
+		<if test="weddingStyle != null and weddingStyle != ''">
+			AND weddingStyle = #{weddingStyle}
+		</if>
+		<if test="rentalStatus != null and rentalStatus!= '' and !rentalStatus.equals('')">
+			AND rentalStatus = #{rentalStatus}
+		</if>
+	</select>
+	<insert id="addWeddingInfo" parameterType="com.dress_rental.entities.Wedding">
+		insert into wedding (weddingName,weddingPicture,weddingStyle,weddingPrice,weddingDeposit,promotion)
+		values
+		(#{weddingName,jdbcType=VARCHAR},#{weddingPicture,jdbcType=VARCHAR},
+		#{weddingStyle,jdbcType=VARCHAR},#{weddingDeposit,jdbcType=VARCHAR},
+		#{weddingPrice,jdbcType=VARCHAR},#{promotion,jdbcType=VARCHAR})
+	</insert>
+	<update id="editWeddingInfo" parameterType="com.dress_rental.entities.Wedding">
+		update wedding
+		<set>
+			<if test="weddingName != null">
+				weddingName = #{weddingName,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingPrice != null">
+				weddingPrice = #{weddingPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingDeposit != null">
+				weddingDeposit = #{weddingDeposit,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingPicture != null">
+				weddingPicture = #{weddingPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingStyle != null and weddingStyle != '' and !weddingStyle.equals('')">
+				weddingStyle = #{weddingStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="promotion != null and promotion != '' and !promotion.equals('')">
+				promotion = #{promotion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{Id,jdbcType=INTEGER}
+	</update>
+	<delete id="removeWeddingInfoByIds">
+		DELETE FROM wedding WHERE Id IN
+		<foreach collection="list" item="id" separator="," open="("
+				 close=")">
+			#{id}
+		</foreach>
+	</delete>
+<!--	前台所有婚纱列表-->
+	<select id="qrypreWedding" resultType="com.dress_rental.entities.Wedding">
+		SELECT Id,weddingName,weddingPicture,
+		CASE weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		WHEN 3 THEN '公主'
+		END AS weddingStyle,weddingPrice,weddingDeposit,
+		rentalStatus,promotion
+		FROM wedding WHERE rentalStatus="0"
+		<if test="weddingStyle != null and weddingStyle != ''">
+			AND weddingStyle= #{weddingStyle}
+		</if>
+		<if test="id != null and id != ''">
+			AND Id = #{id}
+		</if>
+	</select>
+
+<!--后台爆款列表-->
+	<select id="qrylistFaddish" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd, Id,weddingName,weddingPicture,
+		CASE weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,weddingPrice,weddingDeposit,
+		CASE rentalStatus
+		WHEN 0 THEN '未租出'
+		WHEN 1 THEN '已租出'
+		END AS rentalStatus
+		FROM wedding,(SELECT @i:=0) AS idd WHERE promotion="1"
+		<if test="Id != null and Id != ''">
+			AND Id = #{Id}
+		</if>
+		<if test="weddingName != null and weddingName != ''">
+			AND weddingName like replace(CONCAT(CONCAT('%', #{weddingName}), '%'),'
+			','')
+		</if>
+		<if test="weddingStyle != null and weddingStyle != ''">
+			AND weddingStyle = #{weddingStyle}
+		</if>
+		<if test="rentalStatus != null and rentalStatus != '' and !rentalStatus.equals('')">
+			AND rentalStatus = #{rentalStatus}
+		</if>
+	</select>
+
+<!--	编辑后台爆款-->
+	<update id="editpromInfo" parameterType="com.dress_rental.entities.Wedding">
+		update wedding
+		<set>
+			<if test="weddingName != null">
+				weddingName = #{weddingName,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingPrice != null">
+				weddingPrice = #{weddingPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingDeposit != null">
+				weddingDeposit= #{weddingDeposit,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingPicture != null">
+				weddingPicture= #{weddingPicture,jdbcType=VARCHAR},
+			</if>
+			<if test="weddingStyle != null and weddingStyle != '' and !weddingStyle.equals('')">
+				weddingStyle = #{weddingStyle,jdbcType=VARCHAR},
+			</if>
+			<if test="promotion != null and promotion != '' and !promotion.equals('')">
+				promotion = #{promotion,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{Id,jdbcType=INTEGER}
+	</update>
+<!--删除一条或批量删除爆款-->
+	<delete id="deletepromInfoByIds">
+		DELETE FROM wedding WHERE Id IN
+		<foreach collection="array" item="Id" separator="," open="("
+				 close=")">
+			#{Id}
+		</foreach>
+	</delete>
+<!-- 前台爆款列表-->
+	<select id="qrylistLease" resultType="com.dress_rental.entities.Wedding">
+		SELECT Id,weddingName,weddingPicture,
+		case weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,
+		weddingPrice,weddingDeposit,
+		rentalStatus,promotion
+		FROM wedding WHERE promotion="1" and rentalStatus="0"
+	</select>
+
+</mapper>

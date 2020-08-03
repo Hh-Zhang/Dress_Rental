@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>我的购物车详情</title>
+	<meta name="keywords" content="我的购物车详情">
+	<meta name="description" content="我的购物车详情">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="shortcut icon" href="images/favicon.ico">
+	
+	<!-- include main css -->
+	<link rel="stylesheet" type="text/css" href="css/orderstyle.css"/>
+	<link rel="stylesheet" type="text/css" href="css/slick.css"/>	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link href="font-awesome-4.5.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' media="all" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+	<script src="js/jquery.min.js"></script>
+
+	<!--[if lt IE 9]>
+    <script src="http://apps.bdimg.com/libs/html5shiv/r29/html5.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+</head>
+<body>
+	  
+<div>
+	<!--header-->
+	<header class="header">
+	   <div class="container clearfix">
+		   <div class="logo">
+<!--		   		<a href="index.html"><img src="images/logo.png" alt="" /></a>-->
+			   <h3 style="font-family: 华文行楷">婚纱在线租赁系统</h3>
+		   </div>
+		   <div class="nav_right">
+		   		<nav>
+		   			<ul class="clearfix">     
+		   				<li><a href="index.html">首页</a></li>
+		   				<li><a href="case.html">经典系列</a>
+		   					<ul>
+								<li><a href="case.html">全部</a></li>
+		   						<li><a href="case.html">人气</a></li>
+		   						<li><a href="case.html">色系</a></li>
+		   						<li><a href="case.html">价格</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="kehu.html">客照专区</a>
+		   					<ul>
+		   						<li><a href="kehu.html">北京</a></li>
+		   						<li><a href="kehu.html">上海</a></li>
+		   						<li><a href="kehu.html">天津</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="about.html">关于我们</a>
+		   					<ul>
+		   						<li><a href="about.html">公司简介</a></li>
+		   						<li><a href="about_fuwu.html">我们的服务</a></li>
+		   						<li><a href="about_wh.html">企业文化</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="team.html">服务团队</a>
+		   					<ul>
+		   						<li><a href="team.html">北京</a></li>
+		   						<li><a href="team.html">上海</a></li>
+		   						<li><a href="team.html">天津</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="fuwu_price.html">服务报价</a></li>
+		   				<li><a href="news.html">新闻资讯</a>
+		   					<ul>
+		   						<li><a href="news.html">最新优惠</a></li>
+		   						<li><a href="news.html">公司新闻</a></li>
+		   						<li><a href="news.html">行业新闻</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="contact.html" class="active">联系我们</a>
+		   					<ul>
+		   						<li><a href="contact.html">联系我们</a></li>
+		   						<li><a href="feedback.html">在线留言</a></li>
+		   					</ul>
+		   				</li>
+		   			</ul>
+		   		</nav>		   		<div class="cen">
+		   			<a href="">CN</a>
+		   			<a href="">EN</a>
+		   		</div>
+		   </div>
+	 
+	   		
+	   	<a href="#mmenu" class="phone-nav"><i class="fa fa-list"></i></a>
+	   		
+	   </div>
+		<div class="loginuser" >
+			<ul class="userinformation">
+
+				<li >
+					<input type="hidden" id="userid">
+					<a ><img src="" id="userphoto" /></a>
+					<span id="username"></span>
+
+					<ul>
+						<li><a href="userinfor.html">个人信息</a></li>
+						<li><a href="myshopcart.html">我的购物车</a></li>
+						<li><a href="myorder.html">我的订单</a></li>
+						<li><a id="exit">退出登录</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+	</header>
+	<div class="crumbs">
+		<div class="centerBlock">您当前的位置：<a href="index.html">首页 </a>  > <a href="myshopcart.html">我的购物车</a> > <span>婚纱详情</span></div>
+	</div>
+	<!--<div class="comon_top">
+		<div class="top_title">
+			<div class="hh1">联系我们</div>
+			<div class="hh2">为您提供舒适居家环境，倡导高品质生活，提升行业服务标准！</div>
+			<div class="hh3">To provide a comfortable home environment for you,Promote high quality of life, improve the industry standard!</div>
+		</div>
+		<div class="top_nav">
+			<a href="contact.html"><span>联系我们</span></a><a href="feedback.html"  class="active"><span>在线留言</span></a>
+		</div>                                                                     	
+	</div>-->
+	<div class="feedback_con clearfix" id="orderdetail">
+
+		<div class="mes_tt">
+			<h3>婚纱详情</h3>
+		</div>
+		<div class="myshopcartdetail clearfix">
+
+			<div class="confirmation">
+				<div class="in-tit">
+					<h3>婚纱详情</h3>
+				</div>
+				<div class="commodity" style="border-bottom:0;">
+					<div class="wedding f-l">
+						<a href="#"><img src="/images/uploadWedding/wedtwo.jpeg" id="weddingPicture"/></a>
+					</div>
+					<div class="com-con f-l">
+						<h3 style="margin-top: 0px" id="weddingName">卫欲无限 新一代双漩冲刷虹吸式连体坐便器 马桶 座便器2163400mm坑距</h3>
+<!--						<p class="pt">重力出击，超强冲力，排污更流畅</p>-->
+						<dl>
+							<dt>规格</dt>
+							<dd style="float: left;"><span id="weddingStyle">款式：时尚</span><br /><span id="rentalDays">天数：x2</span></dd>
+							<div style="clear:both;"></div>
+						</dl>
+						<dl>
+							<dt>促销</dt>
+							<dd><span class="sp1">满赠</span>      指定商品满1件，赠送卫欲无限 座便器配件三件套</dd>
+							<div style="clear:both;"></div>
+						</dl>
+						<dl>
+							<dt>租赁详情</dt>
+                            <dd><span id="weddingDeposit">押金：250</span><br /><span id="weddingPrice">单价：25</span></dd>
+							<div style="clear:both;"></div>
+						</dl>
+						<dl>
+							<dt>总价</dt>
+							<dd><span class="sp2" id="topri">¥588.00</span></dd>
+							<div style="clear:both;"></div>
+						</dl>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+
+				<div id="gr-btn">
+
+				</div>
+
+			</div>
+
+
+	</div>
+	</div>
+	<div class="home_top">
+		<div class="zhong">相关新闻</div>
+	</div>
+	<div class="zi_news">
+		<ul class="clearfix">
+			<li><a href="news.html">《中国广告》杂志专访唯星总裁赵旭隆：技术驱动营销 致力品效合一</a></li>
+			<li><a href="news.html">唯星集团运营总裁张蓬先生受邀出席，并发表“数字创新，商业之‘</a></li>
+			<li><a href="news.html">作为国内领先的数字营销企业，唯星集团荣获此次IAI国际广告奖变革</a></li>
+			<li><a href="news.html">唯星荣誉榜——2016上半年盘点唯星荣誉榜上半年盘点</a></li>
+			<li><a href="news.html">中国传媒大学广告学院联合主办的IAI国际创享节暨第16届IAI国际</a></li>
+			<li><a href="news.html">年度最佳营销公司”，是对唯星产品、技术、服务及团队等</a></li>
+			<li><a href="news.html">唯星集团运营总裁张蓬受邀出席IAI国际创享节并发表主题演讲商业之智</a></li>
+			<li><a href="news.html">任鲁豫等在内的央视著名主持人，如此豪华阵容</a></li>
+			<li><a href="news.html">整体实力的充分肯定，同时也预示着技术型数字营销企业已经引领行业</a></li>
+		</ul>
+	</div>
+	
+    <!--footer  start-->
+    <footer class="footer">
+		<div class="foot_con">
+			<div class="zhu_c clearfix">
+				<ul class="ul_1 clearfix">
+					<li>
+						<a href="case.html" class="a_tit">经典案例</a>
+						<a href="case.html">人气</a>
+						<a href="case.html">色系</a>
+						<a href="case.html">价格</a>
+					</li>
+					<li>
+						<a href="kehu.html" class="a_tit">客照专区</a>
+						<a href="kehu.html">北京</a>
+						<a href="kehu.html">上海</a>
+						<a href="kehu.html">天津</a>
+					
+					</li>
+					<li>
+						<a href="about.html" class="a_tit">关于我们</a>
+						<a href="about.html">公司简介</a>
+						<a href="about_fuwu.html">我们的服务</a>
+						<a href="about_wh.html">企业文化</a>
+					
+					</li>
+					<li>
+						<a href="team.html" class="a_tit">服务团队</a>
+						<a href="team.html">服务团队</a>
+						<a href="team.html">服务团队</a>
+						<a href="team.html">服务团队</a>
+						
+					</li>
+					<li>
+						<a href="fuwu_price.html" class="a_tit">服务报价</a>
+									
+					</li>
+					<li>
+						<a href="news.html" class="a_tit">新闻资讯</a>
+						<a href="news.html">最新优惠  </a>
+						<a href="news.html">公司新闻   </a>
+						<a href="news.html">行业新闻</a>					
+					</li>
+				</ul>
+				<div class="ul_2">
+					<a href="" class="ying_tit">CONTACT</a>
+					<a href="contact.html" class="a_tit">联系我们</a>
+					<span>联系地址:重庆工程学院*******    </span>
+					<span>手机：<a href="tel:177 1610 1908">177 1610 1908</a></span>
+					<span class="icons">							
+				<div class="bdsharebuttonbox">
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;"class="bds_more" data-cmd="more"><img src="images/icon-jia.png" class="vcenter" alt="" /></a>	
+				</div>
+<!--			<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>-->
+					</span>
+				</div>
+			</div>	
+		</div>
+		<div class="copy_z">
+			<div class="container">
+				<div class="left">
+					<span class="co_zi">COPYRIGHT(C)2020 重庆工程学院</span> <a href="map.html" class="m1">站点地图</a>
+				</div>
+				
+				<div class="right">
+					 <a href="map.html" class="m2">站点地图</a>
+					<a href="#" target="_blank"><img src="images/yu.png" alt=""></a>
+					&nbsp;
+					<span class="er_show">
+						<img src="images/er.png" alt="" />
+						<img src="images/erwei.png" alt="" class="er_img">
+					</span>
+					
+				</div>
+			</div>
+		</div>
+	</footer> 
+    <!--footer  end-->
+
+	<!--移动端  Mmenu-->
+	<nav id="mmenu">
+		<ul>
+			<li class="clear zy_q"><a href="" class="left">简体中文</a> <a href="" class="left">English</a></li>
+			<li><a href="index.html">首页</a>				
+			</li>
+			<li><a href="case.html">经典系列</a>
+				<ul>
+					<li><a href="case.html">人气</a></li>
+					<li><a href="case.html">色系</a></li>
+					<li><a href="case.html">价格</a></li>
+				</ul>
+			</li>
+			<li><a href="kehu.html">客照专区</a>
+				<ul>
+					<li><a href="kehu.html">人气</a></li>
+					<li><a href="kehu.html">色系</a></li>
+					<li><a href="kehu.html">价格</a></li>
+				</ul>
+			</li>
+			<li><a href="about.html">我们的服务</a>
+				<ul>
+					<li><a href="about.html">公司简介</a></li>
+					<li><a href="about.html">我们的服务</a></li>
+					<li><a href="about.html">企业文化</a></li>
+				</ul>
+			</li>
+			<li><a href="team.html">服务团队</a>
+				<ul>
+					<li><a href="team.html">北京</a></li>
+					<li><a href="team.html">上海</a></li>
+					<li><a href="team.html">天津</a></li>
+				</ul>
+			</li>
+			<li><a href="fuwu_price.html">服务报价</a></li>
+			<li><a href="news.html">新闻资讯</a>
+				<ul>
+					<li><a href="news.html">最新优惠</a></li>
+					<li><a href="news.html">公司新闻</a></li>
+					<li><a href="news.html">行业新闻</a></li>
+				</ul>
+			</li>
+			<li><a href="contact.html">联系我们</a>
+				<ul>
+					<li><a href="contact.html">联系我们</a></li>
+					<li><a href="feedback.html">在线留言</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>	
+		
+</div>	
+
+<!--Include Js-->
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!--移动端导航-->
+<script src="js/jquery.mmenu.all.min.js" type="text/javascript" charset="utf-8"></script>
+<!--slick-->
+<script src="js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/wow.js" type="text/javascript" charset="utf-8"></script> 
+ 
+<!--placeholder-->
+<script src="js/jquery.placeholder.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		$('input, textarea').placeholder();
+
+	});
+</script>
+<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/pregetordername.js"></script>
+
+<!--ready要比onload加载的要早-->
+<script>
+    $(document).ready(function(){
+        var local_url = document.location.href;
+        var getcartId = local_url.substr(local_url.indexOf('=')+1);
+        console.log(getcartId);
+
+		$.ajax({
+			async: false,//是否异步请求
+			cache: false,
+			type: 'POST',
+			data:{"id":getcartId},
+			url: '/qryUserOrderDetail',
+			dataType: 'json',
+				success: function (data) {
+				// 重点：前台接收到返回值，直接处理就行
+				 console.log(data);
+					// console.log(i + '....' + data[i].weddingName);
+					// alert(value.weddingName);
+					$('#weddingName').html(data[0].weddingName);
+					$('#weddingStyle').html("款式："+data[0].weddingStyle);
+					$('#weddingDeposit').html("押金："+"￥:"+data[0].weddingDeposit);
+					$('#weddingPrice').html("单价："+"￥:" + data[0].weddingPrice+"/天");
+				    $('#rentalDays').html("天数："+"x " + data[0].rentalDays);
+					$('#weddingPicture').attr('src', "/" + data[0].weddingPicture);
+					$('#topri').html("￥:"+data[0].topri);
+
+			},
+			error: function () {
+				alert('获取婚纱列表失败 ');
+			}
+		});
+
+    });
+
+</script>
+
+
+<script>
+	$("#exit").on("click",function(){
+		$.ajax({
+			url:"/exit",
+			success:function () {
+				location.href="/login.html"
+			}
+		})
+
+	})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dress_rental.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="com.dress_rental.entities.Order">
+    <id column="Id" jdbcType="INTEGER" property="Id" />
+    <result column="orderNo" jdbcType="VARCHAR" property="orderNo" />
+    <result column="orderDate" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="weddingId" jdbcType="INTEGER" property="weddingId" />
+    <result column="dealStatus" jdbcType="INTEGER" property="dealStatus" />
+    <result column="returnStatus" jdbcType="INTEGER" property="returnStatus" />
+    <result column="logisticsStatus" jdbcType="INTEGER" property="logisticsStatus" />
+    <result column="rentalDays" jdbcType="INTEGER" property="rentalDays" />
+    <result column="topri" jdbcType="VARCHAR" property="topri" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, orderNo, orderDate, userId, weddingId, dealStatus
+  </sql>
+<!--订单处理，开始发货    -->
+  <update id="editOrder" parameterType="com.dress_rental.entities.Order">
+    update orderone
+    set
+      logisticsStatus = #{logisticsStatus,jdbcType=BIT}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--    确认归还-->
+    <update id="confReturn" parameterType="java.lang.String">
+    update orderone
+    set 
+      returnStatus =1
+    where Id = #{id}
+  </update>
+<!--    确认收货-->
+     <update id="confGain" parameterType="java.lang.String">
+    update orderone
+    set 
+      logisticsStatus = 2
+    where Id = #{id}
+  </update>
+  <insert id="addOrder" parameterType="com.dress_rental.entities.Order">
+		insert into orderone(orderNo,userId, weddingId,topri,rentalDays)
+		values
+		(#{orderNo,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER}, 
+		#{weddingId,jdbcType=INTEGER},#{topri,jdbcType=VARCHAR},
+        #{rentalDays}
+		)
+		<!--<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+   		 </selectKey>-->
+  </insert>
+  <select id="findOrder" resultMap="BaseResultMap">
+	 select a.orderNo,DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,b.username,b.receiveAdd,
+	 c.weddingName,c.weddingPicture,c.weddingStyle,c.weddingPrice
+	 from orderone a
+	 left join user b on a.userId=b.Id 
+	 left join wedding c on a.weddingId=c.Id
+   	 where a.Id = #{id}
+  </select>
+<!--   后台订单列表-->
+  <select id="qrylistOrder" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,
+		CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.username,b.receiveAdd,c.weddingName,c.weddingPicture,c.weddingStyle,c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id 
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE 1=1
+		<if test="weddingName != null and weddingName != ''">
+			AND c.weddingName  like '%${weddingName}%'
+		</if>
+		<if test="orderNo != null and orderNo != ''">
+			AND a.orderNo like '%${orderNo}%'
+		</if>
+		<if test="logisticsStatus != null and logisticsStatus != ''">
+			AND a.logisticsStatus like '%${logisticsStatus}%'
+		</if>
+	</select>
+<!-- 查询个人订单-->
+	 <select id="qrylistUserOrder"  resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,
+	    case c.weddingStyle
+	    WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,
+	c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.userId=#{id}
+	</select>
+<!--    查询个人订单详情-->
+    <select id="qryUserOrderDetail"  resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,c.weddingPrice,c.weddingDeposit,case c.promotion when 0 then '非爆款推荐' when 1 then '爆款推荐' end as promotion
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.Id=#{id}
+
+	</select>
+    <!--    查询个人未发货订单-->
+    <select id="qryUnsendOrder" parameterType="string" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.userId=#{id} and a.logisticsStatus=#{logisticsStatus}
+	</select>
+
+    <!--    查询个人已发货订单-->
+    <select id="qryUngainOrder" parameterType="string" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.userId=#{id} and a.logisticsStatus=#{logisticsStatus}
+	</select>
+    <!--    查询个人已签收订单-->
+    <select id="qrygainOrder" parameterType="string" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.userId=#{id} and a.logisticsStatus=#{logisticsStatus}
+	</select>
+
+    <!--    查询个人未归还订单-->
+    <select id="qryUnreturnOrder" parameterType="string" resultType="java.util.Map">
+		SELECT (@i:=@i+1) idd,a.Id,a.orderNo, DATE_FORMAT(a.orderDate ,'%Y-%m-%d')orderDate,CASE a.returnStatus
+		WHEN 0 THEN '未归还' WHEN 1 THEN '已归还'
+		ELSE '归还中...' END AS returnStatus,CASE a.logisticsStatus 	WHEN 0 THEN '未发货' WHEN 1 THEN '已发货' WHEN 2 THEN '已签收' END AS logisticsStatus,a.rentalDays,a.topri,
+	b.realname,b.phonenum,b.receiveAdd,c.weddingName,c.weddingPicture,CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,c.weddingPrice,c.weddingDeposit
+	 FROM orderone a
+	 LEFT JOIN user b on a.userId=b.Id
+	  LEFT JOIN  wedding c on a.weddingId=c.Id,(SELECT @i:=0) AS idd WHERE
+	  a.userId=#{id} and a.logisticsStatus=#{logisticsStatus} and a.returnStatus=#{returnStatus}
+	</select>
+
+<!--    后台单条及批量删-->
+    <delete id="removeBackOrderInfoByIds">
+        DELETE FROM orderone WHERE Id IN
+        <foreach collection="array" item="id" separator="," open="("
+                 close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

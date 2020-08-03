@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>用户管理</title>
+  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/css/backuserlayui.css" type="text/css">
+</head>
+<body>
+<div class="layui-card-body ">
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input"  autocomplete="off" placeholder="请输入账号" name="username" id="searchone">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input"  autocomplete="off" placeholder="请输入用户名" name="realname" id="searchtwo">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <input type="text" name="phonenum"  placeholder="请输入手机号" autocomplete="off" class="layui-input" id="searchthree">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <button class="layui-btn"  id="sousuo" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+            <button class="layui-btn layui-btn-normal"  onclick="cleanBtn()"><i class="layui-icon"></i>清除</button>
+        </div>
+
+</div>
+<div class="layui-card-header">
+    <button class="layui-btn layui-btn-danger" id="delAll_btn"><i class="layui-icon"></i>批量删除</button>
+    <button class="layui-btn" id="add_btn" ><i class="layui-icon"></i>添加</button>
+
+</div>
+<div class="layui-card-body layui-table-body layui-table-main">
+<table class="layui-hide" id="idtest" lay-filter="demo"></table>
+</div>
+<script type="text/html" id="barDemo">
+  <a class="td-manage" lay-event="detail" title="查看详情"><i class="layui-icon">&#xe642;</i></a>
+  <a class="td-manage " lay-event="edit" title="编辑"><i class="layui-icon">&#xe631;</i></a>
+  <a class="td-manage " title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+<script src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/backuserlayui.js"></script>
+</body>
+</html>   

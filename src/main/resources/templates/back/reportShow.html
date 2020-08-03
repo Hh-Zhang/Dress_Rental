@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>租赁报表展示</title>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+</head>
+<body onload="showtable()">
+<select style="margin-top:30px" id="seltime" onclick="showtable()">
+    <option value="2020">请选择年份</option>
+    <option value="2015">2015</option>
+    <option value="2016">2016</option>
+    <option value="2017">2017</option>
+    <option value="2018">2018</option>
+    <option value="2019">2019</option>
+    <option value="2020">2020</option>
+</select>
+
+    <div id="main" style="width: 1180px;height:650px;margin-top:23px;float:left">
+
+
+    </div>
+
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        myChart.setOption({
+            title: {
+                text: '婚纱租赁报表展示'
+            },
+
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {
+                data: ['租赁总金额', '租赁数量']
+            },
+            xAxis:
+                [{
+                    type: 'category',
+                    name:'月份',
+                    axisLabel:{
+                        interval: 0
+                    },
+
+                    data: [],
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+
+                }],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '租赁总金额',
+                    min: 0,
+                    max: 20000,
+                    interval: 2000,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '租赁数量',
+                    min: 0,
+                    max: 10,
+                    interval: 1,/*设置表格刻度*/
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '租赁总金额',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            color:'#46A3FF'
+                          /*  //这里是重点
+                            color: function(params) {
+                                //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                                var colorList = ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#ca8622'];
+                                return colorList[params.dataIndex]
+                            }*/
+                        }
+                    },
+
+                    data: []
+                },
+                {
+                    name: '租赁数量',
+                    type: 'line',
+                    itemStyle: {
+                        normal: {
+                            color:'#000000'
+                        }
+                    },
+                    yAxisIndex: 1,
+                    data: []
+                }
+            ]
+        });
+
+
+
+            function showtable() {
+                var seltime = $("#seltime").val();
+                console.log(seltime);
+                $.ajax({
+                    type: "post",
+                    async: true, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+                    url: "/qryReportList",
+                    data: {"year": seltime},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        var names=[];    //类别数组（实际用来盛放X轴坐标值）
+                        var price=[];
+                        var nums=[];    //销量数组（实际用来盛放Y坐标值）
+
+                        for (var i = 0; i < data.length; i++) {
+                            names.push(data[i].Month);
+                        }
+                        for (var i = 0; i < data.length; i++) {
+                            price.push(data[i].totalPrice);
+                        }
+                        for (var i = 0; i < data.length; i++) {
+                            nums.push(data[i].totalNumber);
+                        }
+
+                        myChart.setOption({
+                            xAxis: {
+                                data: names
+                            },
+                            series: [
+                                {
+                                // 根据名字对应到相应的系列
+                                name: '租赁总金额',
+                                data: price
+                            },{
+                                name:'租赁数量',
+                                data:nums
+
+                                }
+                            ]
+                        })
+                    },
+                    error: function (errorMsg) {
+                        //请求失败时执行该函数
+                        alert("图表请求数据失败!");
+                        myChart.hideLoading();
+                    }
+
+                })
+            }
+    </script>
+<script>
+
+</script>
+</body>
+</html>

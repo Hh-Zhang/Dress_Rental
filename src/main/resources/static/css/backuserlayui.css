@@ -1,0 +1,55 @@
+body{margin: 10px;}
+    .demo-carousel{height: 200px; line-height: 200px; text-align: center;}
+    #search1{
+	    width: 212px;
+	    position: absolute;
+	    left: 21%;
+	    top: 10px;
+    }
+    #search2{
+	    width: 212px;
+	    position: absolute;
+	    left: 43%;
+	    top: 10px;
+    }
+    .laytable-cell-1-sex{
+    	width:0;
+    }
+    .layuibtn{
+    	margin-top:9%;
+    	margin-left:61%;
+    }
+    #username{
+    	margin-left: 16px;
+    }
+    #sex{
+	    margin-left: 16px;
+	    margin-top: 11px;
+    }
+    #city{
+	    margin-left: 16px;
+    }
+    #phone{
+    	margin-left: 16px;
+    }
+    #receiveAdd{
+    	margin-left: 16px;
+    }
+    #addTime{
+    	margin-left: 16px;
+    }
+    #tubiao{
+        position: absolute;
+    	left: 49%;
+    	top: 25%;
+    	border: 1px solid;
+    	background: rgba(247, 238, 238, 0.79);
+    }
+    #watchImg{
+    	width: 197px;
+    	height: 197px;
+   		margin-left: 26%;
+    }
+   /* .editfaddish input{
+        width:130px;
+    }*/

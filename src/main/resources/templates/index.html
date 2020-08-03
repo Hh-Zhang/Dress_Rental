@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>婚纱在线租赁系统</title>
+	<meta name="keywords" content="婚纱在线租赁系统">
+	<meta name="description" content="婚纱在线租赁系统">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="shortcut icon" href="images/favicon.ico">
+	
+	<!-- include main css -->
+	<link rel="stylesheet" type="text/css" href="/static/css/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.mmenu.all.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+	<link href="/static/font-awesome-4.5.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' media="all" />
+	<link rel="stylesheet" type="text/css" href="/static/css/animate.css"/>
+	<script src="/static/js/jquery.min.js"></script>
+	<!--[if lt IE 9]>
+    <script src="http://apps.bdimg.com/libs/html5shiv/r29/html5.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body onload="verifyuser()">
+	 
+<div >
+	<!--header-->
+	<header class="header">
+	   <div class="container clearfix">
+		   <div class="logo">
+<!--		   <a href="index.html"><img src="images/logo.png" alt="" /></a>-->
+			   <h3 style="font-family: 华文行楷">婚纱在线租赁系统</h3>
+		   </div>
+		   <div class="nav_right">
+		   		<nav>
+		   			<ul class="clearfix">     
+		   				<li><a href="index.html" class="active">首页</a></li>
+		   				<li><a href="">经典系列</a>
+		   					<ul>
+								<li><a href="case.html">全部</a></li>
+		   						<li><a href="case.html">人气</a></li>
+		   						<li><a href="case.html">色系</a></li>
+		   						<li><a href="case.html">价格</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="kehu.html">客照专区</a>
+		   					<ul>
+		   						<li><a href="kehu.html">北京</a></li>
+		   						<li><a href="kehu.html">上海</a></li>
+		   						<li><a href="kehu.html">天津</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="about.html">关于我们</a>
+		   					<ul>
+		   						<li><a href="about.html">公司简介</a></li>
+		   						<li><a href="about_fuwu.html">我们的服务</a></li>
+		   						<li><a href="about_wh.html">企业文化</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="team.html">服务团队</a>
+		   					<ul>
+		   						<li><a href="team.html">北京</a></li>
+		   						<li><a href="team.html">上海</a></li>
+		   						<li><a href="team.html">天津</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="fuwu_price.html">服务报价</a></li>
+		   				<li><a href="news.html">新闻资讯</a>
+		   					<ul>
+		   						<li><a href="news.html">最新优惠</a></li>
+		   						<li><a href="news.html">公司新闻</a></li>
+		   						<li><a href="news.html">行业新闻</a></li>
+		   					</ul>
+		   				</li>
+		   				<li><a href="contact.html">联系我们</a>
+		   					<ul>
+		   						<li><a href="contact.html">联系我们</a></li>
+		   						<li><a href="feedback.html">在线留言</a></li>
+		   					</ul>
+		   				</li>
+
+		   			</ul>
+		   		</nav>
+
+		   </div>
+	 
+	   		
+	   	<a href="#mmenu" class="phone-nav"><i class="fa fa-list"></i></a>
+	   		
+	   </div>
+		<div class="loginuser" style="display: none" >
+		<ul class="userinformation">
+
+			<li >
+				<a ><img src="" id="userphoto" /></a>
+				<span id="username"></span>
+
+				<ul>
+					<li><a href="userinfor.html">个人信息</a></li>
+					<li><a href="myshopcart.html" >我的购物车</a></li>
+					<li><a href="myorder.html">我的订单</a></li>
+					<li><a id="exit" >退出登录</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+		<div class="loginuser1">
+			<span class="span1">还未登录？请先   </span>
+			<a href="login.html">登录</a>  |  <a href="register.html">注册</a>
+		</div>
+	</header>
+			
+	<!--banner  start-->
+	<section class="banner">
+	    <div><a href="index.html"><img src="/static/images/banner1.png" alt=""></a></div>
+	    <div><a href="index.html"><img src="/static/images/banner2.jpg" alt=""></a></div>
+	    <div><a href="index.html"><img src="/static/images/banner3.jpg" alt=""></a></div>
+	</section>
+	<!--banner end-->
+	<div class="home_pro">
+		<div class="pro_title">
+			<span>CLASSIC SERIES</span>
+			<div class="t1">品质境界即刻体验</div>
+			<div class="t2">秉承"整合数字资源,技术驱动营销"的理念，专注于数字营销技术、产品、资源、服务的创新与整合，为传统企业互联网商业转型各个阶段提供全方位应用支撑。</div>
+			<span class="font_en">Villa decoration attention to indoor and outdoor environment of the overall planning and design, the people's pursuit of villa decoration from the simple design of luxury </span>
+			<span class="font_en">decoration began to move closer to the human nature and high quality of construction technology.</span>
+			<div class="t3" >爆款推荐</div>
+		</div>
+
+		<div class="pro_com">
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId0&weddingName0&weddingStyle0&weddingDeposit0&weddingPrice0&weddingPicture0"><img src=""  alt="加载失败" id="pic0"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId0&weddingName0&weddingStyle0&weddingDeposit0&weddingPrice0&weddingPicture0"><span class="num" id="pri0">01</span><span class="tt1" id="weddingName0">韩城婚纱</span><span class="tt2" id="weddingStyle0">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId0&weddingName0&weddingStyle0&weddingDeposit0&weddingPrice0&weddingPicture0" class="more"></a>
+					</div>
+				</div>						
+			</div>
+
+
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId1&weddingName1&weddingStyle1&weddingDeposit1&weddingPrice1&weddingPicture1"><img src=""  alt="加载失败" id="pic1"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId1&weddingName1&weddingStyle1&weddingDeposit1&weddingPrice1&weddingPicture1"><span class="num" id="pri1">01</span><span class="tt1" id="weddingName1">韩城婚纱</span><span class="tt2" id="weddingStyle1">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId1&weddingName1&weddingStyle1&weddingDeposit1&weddingPrice1&weddingPicture1" class="more"></a>
+					</div>
+				</div>
+			</div>
+
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId2&weddingName2&weddingStyle2&weddingDeposit2&weddingPrice2&weddingPicture2"><img src=""  alt="加载失败" id="pic2"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId2&weddingName2&weddingStyle2&weddingDeposit2&weddingPrice2&weddingPicture2"><span class="num" id="pri2">01</span><span class="tt1" id="weddingName2">韩城婚纱</span><span class="tt2" id="weddingStyle2">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId2&weddingName2&weddingStyle2&weddingDeposit2&weddingPrice2&weddingPicture2" class="more"></a>
+					</div>
+				</div>
+			</div>
+
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId3&weddingName3&weddingStyle3&weddingDeposit3&weddingPrice3&weddingPicture3"><img src=""  alt="加载失败" id="pic3"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId3&weddingName3&weddingStyle3&weddingDeposit3&weddingPrice3&weddingPicture3"><span class="num" id="pri3">01</span><span class="tt1" id="weddingName3">韩城婚纱</span><span class="tt2" id="weddingStyle3">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId3&weddingName3&weddingStyle3&weddingDeposit3&weddingPrice3&weddingPicture3" class="more"></a>
+					</div>
+				</div>
+			</div>
+
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId4&weddingName4&weddingStyle4&weddingDeposit4&weddingPrice4&weddingPicture4"><img src=""  alt="加载失败" id="pic4"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId4&weddingName4&weddingStyle4&weddingDeposit4&weddingPrice4&weddingPicture4"><span class="num" id="pri4">01</span><span class="tt1" id="weddingName4">韩城婚纱</span><span class="tt2" id="weddingStyle4">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId4&weddingName4&weddingStyle4&weddingDeposit4&weddingPrice4&weddingPicture4" class="more"></a>
+					</div>
+				</div>
+			</div>
+			<div >
+				<div class="pic" ><a href="case_show.html?weddingId5&weddingName5&weddingStyle5&weddingDeposit5&weddingPrice5&weddingPicture5"><img src=""  alt="加载失败" id="pic5"/><i></i></a></div>
+				<div class="text-wrap">
+					<a href="pro"><span class="num"></span><span class="tt1"></span><span class="tt2"></span></a>
+					<div class="txt">
+						<a href="case_show.html?weddingId5&weddingName5&weddingStyle5&weddingDeposit5&weddingPrice5&weddingPicture5"><span class="num" id="pri5">01</span><span class="tt1" id="weddingName5">韩城婚纱</span><span class="tt2" id="weddingStyle5">唯美浪漫</span>
+							<p>
+								现代人面临着城市的喧嚣和污染，激烈的竞争压力，还有忙碌的工作和紧张的生活...
+							</p>
+						</a>
+						<a href="case_show.html?weddingId5&weddingName5&weddingStyle5&weddingDeposit5&weddingPrice5&weddingPicture5" class="more"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="company">
+		<div class="container">
+			<ul class="clearfix">
+				<li><a href="case.html"><img src="/static/images/g5.jpg" alt="" class="vcenter"/><i></i></a></li>
+				<li>
+					<a href="case.html" class="a_t">婚纱租赁</a>
+					<span class="font_en">Jindo wedding photography</span>
+					<p>
+						经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，
+						积极引进优秀的互联网技术、营销策略及内容创意专家，先后
+						从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模.......
+					</p>
+					<a href="case.html" class="more"></a>
+				</li>
+				<li>
+					<a href="news.html" class="a_t">金牌管家服务</a>
+					<span class="font_en">the whole process of design services  </span>
+					<p>我们坚持SPRING全程服务，拥有绿色家园只是你生活下一华章的开始
+					24小时售后服务电话：<a href="tel:021-31265245">021-31265245</a>
+					</p>
+					<a href="news.html" class="more"></a>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="home_team">
+		<div class="top clearfix">
+			<div class="l1_1">
+				<a href="team.html">服务团队</a>
+			</div>
+			<div class="l1_2">
+				秉承"整合数字资源,技术驱动营销"的理念，专注于数字营销技术、产品、资源、服务的创新与整合
+			</div>
+		</div>
+		<ul class="clearfix team_tu"  id="ulul">
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                <div class="c1">主任摄影师：王舒斐1</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                <div class="c1">主任摄影师：王舒斐2</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+              	<div class="c1">主任摄影师：王舒斐3</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                <div class="c1">主任摄影师：王舒斐4</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                <div class="c1">主任摄影师：王舒斐5</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                 <div class="c1">主任摄影师：王舒斐6</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+			<li>
+				<div class="pic"><img src="/static/images/team_02.png" alt="" /><i></i></div>
+                <div class="c1">主任摄影师：王舒斐7</div><div class="c2">摄影理念："整合数字资源,技术驱动营销</div>
+                <div class="c3">经过10余年的快速发展，唯星深刻理解未来数字营销内容与技术的融合之势，积
+                	极引进优秀的互联网技术、营销策略及内容创意专家
+                	，先后从IBM、微软、华为等知名IT企业引进大量优秀人才，目前公司逾千人规模
+                	，上海作为总部，同步辐射北京、深圳、香港、江浙、内蒙等全国分/子公司，目
+                	前已服务企业数量达上万家。
+                </div>
+			</li>
+
+            <div class="xianshiqy">
+                 <div  class="zuo"></div><div  class="you"></div>
+                 <b class="closed" id="team_closed">&nbsp;</b>
+                 <div class="biaotiss"></div>
+                 <div class="biao2tiss"></div>
+                 <div class="neirongss"></div>
+            </div>		
+		</ul>
+    <script>
+   $(document).ready(function() {
+		var index = 0;
+		function  huoqu(index){
+				   var  biaoti =$("#ulul  li").eq(index).find(".c1").html(); 
+				   var  biao2ti =$("#ulul  li").eq(index).find(".c2").html(); 
+				   var  neirong =$("#ulul  li").eq(index).find(".c3").html(); 
+				   $("#ulul  li .pic").eq(index).addClass("active").parent().siblings("li").find(".pic").removeClass("active")
+					$(".biaotiss").html(biaoti) 
+					$(".biao2tiss").html(biao2ti) 
+					$(".neirongss").html(neirong)
+					$(".xianshiqy").fadeIn()						
+			}
+       
+	   $("#ulul  li").click(function(){
+		    index = $(this).index();
+		    huoqu(index)
+		   });
+		   $(".zuo").click(function(){
+			if(index>=0){
+					index-=1;
+					huoqu(index)	
+					
+				}
+			if(index==-1){
+				    index+=14;
+					huoqu(index)	
+					
+				}
+			});
+		$(".you").click(function(){
+			if(index<=13){
+					index+=1;
+					huoqu(index)
+					
+			}
+			if(index==14){
+				    index-=14
+					huoqu(index)
+					
+			}
+			});
+		$("#team_closed").click(function(){
+			$(".xianshiqy").hide();
+			 $("#ulul  li .pic").removeClass("active");
+		})
+		
+    });
+    </script>    
+        
+	</section>
+	<section class="home_news">
+		<div class="container">
+			<div class="home_top">
+				<div class="zhong">最新资讯</div>
+				<div class="ying">For Customers to provide professional information</div>
+				<a href="news.html" class="more"></a>
+			</div>
+			<ul class="clearfix">
+				<li><a href="news.html">《中国广告》杂志专访唯星总裁赵旭隆：技术驱动营销 致力品效合一</a></li>
+				<li><a href="news.html">唯星集团运营总裁张蓬先生受邀出席，并发表“数字创新，商业之‘</a></li>
+				<li><a href="news.html">作为国内领先的数字营销企业，唯星集团荣获此次IAI国际广告奖变革</a></li>
+				<li><a href="news.html">唯星荣誉榜——2016上半年盘点唯星荣誉榜上半年盘点</a></li>
+				<li><a href="news.html">中国传媒大学广告学院联合主办的IAI国际创享节暨第16届IAI国际</a></li>
+				<li><a href="news.html">年度最佳营销公司”，是对唯星产品、技术、服务及团队等</a></li>
+				<li><a href="news.html">唯星集团运营总裁张蓬受邀出席IAI国际创享节并发表主题演讲商业之智</a></li>
+				<li><a href="news.html">任鲁豫等在内的央视著名主持人，如此豪华阵容</a></li>
+				<li><a href="news.html">整体实力的充分肯定，同时也预示着技术型数字营销企业已经引领行业</a></li>
+			</ul>
+		</div>
+	</section>
+	<section class="hehuo">
+		<div class="container">
+			<div class="home_top">
+				<div class="zhong">国际品牌合作伙伴</div>
+				<div class="ying">International brand partners</div>			
+			</div>
+			
+		</div>
+		<div class="hehuo_con">
+			<div class="nei">
+				<div>
+					<a href="">
+						<img src="/static/images/he_01.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_02.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_03.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_04.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_05.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_06.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+				<div>
+					<a href="">
+						<img src="/static/images/he_01.png" alt="" class="vcenter"/><i></i>
+					</a>
+				</div>
+
+				
+			</div>
+		</div>
+	</section>
+    <!--footer  start-->
+    <footer class="footer">
+		<div class="foot_con">
+			<div class="zhu_c clearfix">
+				<ul class="ul_1 clearfix">
+					<li>
+						<a href="case.html" class="a_tit">经典案例</a>
+						<a href="case.html">人气</a>
+						<a href="case.html">色系</a>
+						<a href="case.html">价格</a>
+					</li>
+					<li>
+						<a href="kehu.html" class="a_tit">客照专区</a>
+						<a href="kehu.html">北京</a>
+						<a href="kehu.html">上海</a>
+						<a href="kehu.html">天津</a>
+					
+					</li>
+					<li>
+						<a href="about.html" class="a_tit">关于我们</a>
+						<a href="about.html">公司简介</a>
+						<a href="about_fuwu.html">我们的服务</a>
+						<a href="about_wh.html">企业文化</a>
+					
+					</li>
+					<li>
+						<a href="team.html" class="a_tit">服务团队</a>
+						<a href="team.html">服务团队</a>
+						<a href="team.html">服务团队</a>
+						<a href="team.html">服务团队</a>
+						
+					</li>
+					<li>
+						<a href="fuwu_price.html" class="a_tit">服务报价</a>
+									
+					</li>
+					<li>
+						<a href="news.html" class="a_tit">新闻资讯</a>
+						<a href="news.html">最新优惠  </a>
+						<a href="news.html">公司新闻   </a>
+						<a href="news.html">行业新闻</a>					
+					</li>
+				</ul>
+				<div class="ul_2">
+					<a href="contact.html" class="ying_tit">CONTACT</a>
+					<a href="contact.html" class="a_tit">联系我们</a>
+					<span>联系地址:重庆工程学院*******    </span>
+					<span>手机：<a href="tel:177 1610 1908">177 1610 1908</a></span>
+					<span class="icons">							
+				<div class="bdsharebuttonbox">
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;" data-cmd="sqq"><img src="images/icon-qq.png" class="vcenter" alt=""></a>
+					<a href="javascript:;"class="bds_more" data-cmd="more"><img src="images/icon-jia.png" class="vcenter" alt="" /></a>	
+				</div>
+<!--			<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>-->
+					</span>
+				</div>
+			</div>	
+		</div>
+		
+		<div class="copy_z">
+			<div class="container">
+				<div class="left">
+					<span class="co_zi">COPYRIGHT(C)2019-2020 重庆工程学院...</span> <a href="map.html" class="m1">站点地图</a>
+				</div>
+				
+				<div class="right">
+					 <a href="map.html" class="m2">站点地图</a>
+					<a href="#" target="_blank"><img src="/static/images/yu.png" alt=""></a>
+					&nbsp;
+					<span class="er_show">
+						<img src="/static/images/er.png" alt="" />
+						<img src="/static/images/erwei.png" alt="" class="er_img">
+					</span>
+					
+				</div>
+			</div>
+		</div>
+	</footer> 
+    <!--footer  end-->
+
+
+</div>
+
+<!--Include Js-->
+<script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!--移动端导航-->
+<script src="/static/js/jquery.mmenu.all.min.js" type="text/javascript" charset="utf-8"></script>
+<!--slick-->
+<script src="/static/js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/wow.js" type="text/javascript" charset="utf-8"></script>
+
+<!--placeholder-->
+<script src="/static/js/jquery.placeholder.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){ $('input, textarea').placeholder();});
+</script>
+<script src="/static/js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/prepromotion.js"></script>
+<!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+<script>
+	function  verifyuser() {
+        // $('.loginuser').css('display','none');
+        // $('.loginuser1').css('display','block');
+	    $.ajax({
+            type : 'post',
+            url : '/getname',
+            dataType:'json',
+            success : function(obj) {
+                console.log(obj[0].username);
+                if (obj[0].username!=null) {
+                    $('.loginuser').css('display','block');
+                    $('.loginuser1').css('display','none');
+                    $("#username").html("欢迎您:"+obj[0].username);
+                    $("#userphoto").attr('src','/'+obj[0].photo);
+                }else {
+                    $('.loginuser1').css('display','block');
+                    $('.loginuser').css('display','none');
+                }
+            },
+            error: function(ress){
+                alert("失败2！");
+            }
+        });
+
+
+
+	/*	$.post("/getname",function(obj){
+		    console.log(obj[0].username);
+                $("#username").html("欢迎您:"+obj[0].username);
+                $("#userphoto").attr('src','/'+obj[0].photo);
+		},"json");
+		if (obj[0].username!=null) {
+            $('.loginuser').css('display','block');
+        }else {
+            $('.loginuser1').css('display','none');
+        }*/
+
+
+	}
+	
+</script>
+
+<script>
+	$("#exit").on("click",function(){
+         $.ajax({
+			 url:"/exit",
+			 success:function () {
+				 // window.location.reload();
+				 $('.loginuser').css('display','none');
+				 $('.loginuser1').css('display','block');
+			 }
+		 })
+
+	})
+
+</script>
+</body>
+</html>

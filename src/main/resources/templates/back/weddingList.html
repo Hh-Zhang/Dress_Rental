@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>婚纱信息管理</title>
+  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/css/weddinglayui.css" type="text/css">
+
+</head>
+<body>
+<div class="layui-card-body ">
+  <div class="layui-inline layui-show-xs-block">
+    <input class="layui-input"  autocomplete="off" placeholder="请输入婚纱名" name="weddingName" id="searchone">
+  </div>
+  <div class="layui-inline layui-show-xs-block">
+    <select name="weddingStyle" class="weddingStyle" id="searchtwo" lay-verify="required" lay-search="">
+      <option value="">请选择婚纱风格</option>
+      <option value="0">复古</option>
+      <option value="1">时尚</option>
+      <option value="2">优雅</option>
+      <option value="3">公主</option>
+    </select>
+  </div>
+  <div class="layui-inline layui-show-xs-block">
+    <select name="rentalStatus" class="rentalStatus" id="searchthree" placeholder="租赁状态" lay-verify="required" lay-search="">
+      <option value="">全部</option>
+      <option value="0">未租出</option>
+      <option value="1">已租出</option>
+    </select>
+  </div>
+  <div class="layui-inline layui-show-xs-block">
+    <button class="layui-btn"  id="search" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+    <button class="layui-btn layui-btn-normal"  onclick="cleanBtn()"><i class="layui-icon"></i>清除</button>
+  </div>
+</div>
+<div class="layui-card-header">
+  <button class="layui-btn layui-btn-danger" id="delAll_btn"><i class="layui-icon"></i>批量删除</button>
+  <button class="layui-btn " id="add_btn" ><i class="layui-icon"></i>添加</button>
+</div>
+<!--<div>
+<button class="layui-btn weddingAdd" data-type="weddingAdd">
+  <i class="layui-icon">&#xe654;</i> weddingDel
+</button>
+<button class="layui-btn layui-btn-danger " data-type="weddingDel">
+  <i class="layui-icon">&#xe640;</i>
+</button>
+<input type="text" id="ss1" name="weddingName" required lay-verify="required" placeholder="婚纱名" autocomplete="off" class="layui-input">
+   <div class="layui-input-inline ss3">
+    <select name="state" class="ss3_c" id="ss3_c" placeholder="租赁状态" lay-verify="required" lay-search="">
+      <option value="">全部</option>
+      <option value="0">未租出</option>
+      <option value="1">已租出</option>
+    </select>
+  </div>
+  <div class="layui-input-inline ss2">
+    <select name="weddingStyle" class="ss2_c" id="ss2_c" lay-verify="required" lay-search="">
+      <option value="">直接选择婚纱风格</option>
+      <option value="0">复古</option>
+      <option value="1">时尚</option>
+      <option value="2">优雅</option>
+      <option value="3">公主</option>
+    </select>
+  </div>
+  <button id="chaxun" data-type="reload" class="layui-btn layui-btn-normal" style="margin-left: 53%;">查询</button>
+  <button class="layui-btn" type="reset" onclick="cleanBtn()">清除</button>
+</div>-->
+<table class="layui-hide" id="idtest" lay-filter="demo"></table>
+<script type="text/html" id="barDemo">
+  <a class="td-manage" lay-event="detail" title="查看详情"><i class="layui-icon">&#xe642;</i></a>
+  <a class="td-manage " lay-event="edit" title="编辑"><i class="layui-icon">&#xe631;</i></a>
+  <a class="td-manage " title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+<script type="text/html" id="titleTpl">
+  {{#  if(d.rentalStatus === '未租出'){ }}
+    <span style="color: #f12020;">{{ d.rentalStatus }}</span>
+  {{#  } else { }}
+    <span style="color: #55ad20;">{{ d.rentalStatus }}</span>
+  {{#  } }}
+</script>
+<script type="text/html" id="titleTp2">
+  {{#  if(d.promotion === '是'){ }}
+    <span style="color: #55ad20;">{{ d.promotion }}</span>
+  {{#  } else { }}
+    {{d.promotion}}
+  {{#  } }}
+</script>
+<script src="/layui/layui.js"></script>
+<!--<script type="text/javascript" src="/js/weddingList.js"></script>-->
+<script src="/js/backweddingList.js"></script>
+</body>
+</html>   

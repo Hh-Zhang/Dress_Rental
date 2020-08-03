@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dress_rental.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.dress_rental.entities.User">
+        <id column="Id" jdbcType="INTEGER" property="Id" />
+    </resultMap>
+    <!--用户注册-->
+  <insert id="addCustomer" parameterType="com.dress_rental.entities.User">
+    insert into user (username,password,phonenum,sex)  values (#{username},#{password},#{phonenum},#{sex});
+  </insert>
+<!--  登录验证用户-->
+  <select id="verifyCustomer" parameterType="com.dress_rental.entities.User" resultType="com.dress_rental.entities.User">
+    select * from user where username=#{username} and password=#{password}
+  </select>
+<!-- 查询所有用户-->
+   <select id="selectAllUsers" parameterType="java.util.Map" resultType="com.dress_rental.entities.User">
+       SELECT (@i:=@i+1) idd,id ,username,realname,status,
+       case
+       when sex = 1 then '男'
+       when sex = 0 then '女'
+       else '其他' end  sex,
+       phonenum,photo,
+       case when type=1 then '管理员'
+            when  type=0 then '普通用户'
+      end type,receiveAdd,DATE_FORMAT(addTime ,'%Y-%m-%d')addTime from user,(SELECT @i:=0) AS idd
+      where 1=1
+      <if test="username!=null and username!= ''">
+        and username like '%${username}%'
+      </if>
+       <if test="realname!=null and realname!= ''">
+           and realname like '%${realname}%'
+       </if>
+      <if test="phonenum!=null and phonenum!=''">
+         and phonenum like '%${phonenum}%'
+      </if>
+      group by id asc
+   </select>
+<!--客户端查询资料-->
+    <select id="qryperuser" resultType="com.dress_rental.entities.User">
+        select * from user where id=#{id};
+    </select>
+<!--    添加用户-->
+    <insert id="addUser" parameterType="com.dress_rental.entities.User">
+    insert into user (username,realname,password,phonenum,sex,type,photo,receiveAdd)  values (#{username},#{realname},#{password},#{phonenum},#{sex},#{type},#{photo},#{receiveAdd});
+  </insert>
+    <!--编辑用户-->
+    <update id="editUserInfo" parameterType="com.dress_rental.entities.User">
+        update user
+        <set>
+        <if test="username != null">
+            username = #{username,jdbcType=VARCHAR},
+        </if>
+        <if test="realname != null">
+            realname = #{realname,jdbcType=VARCHAR},
+        </if>
+        <if test="photo != null">
+            photo = #{photo,jdbcType=VARCHAR},
+        </if>
+        <if test="sex != null">
+            sex = #{sex,jdbcType=INTEGER},
+        </if>
+        <if test="type != null">
+            type= #{type,jdbcType=VARCHAR},
+        </if>
+        <if test="receiveAdd != null">
+            receiveAdd = #{receiveAdd,jdbcType=VARCHAR},
+        </if>
+        <if test="phonenum != null">
+            phonenum = #{phonenum,jdbcType=VARCHAR},
+        </if>
+        <if test="addTime != null">
+            addTime = #{addTime,jdbcType=TIMESTAMP}
+        </if>
+    </set>
+    where Id = #{Id,jdbcType=INTEGER}
+    </update>
+<!--   删除一条或多条用户-->
+    <delete id="deleteUsersById" parameterType="com.dress_rental.entities.User">
+        delete  from user where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+</mapper>

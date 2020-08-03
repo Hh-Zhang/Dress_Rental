@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dress_rental.dao.ReturnWeddingDao">
+	<resultMap id="BaseResultMap" type="com.dress_rental.entities.ReturnWedding">
+		<id column="Id" jdbcType="INTEGER" property="Id" />
+		<result column="retexpressNum" jdbcType="VARCHAR" property="retexpressNum" />
+		<result column="orderId" jdbcType="INTEGER" property="orderId" />
+	</resultMap>
+<!--	查询归还婚纱列表-->
+	<select id="qrylistbakwedding" parameterType="java.util.Map" resultType="java.util.Map">
+		select (@i:=@i+1) idd,a.Id AS iid,a.orderNo,case
+		when a.weddingDeposit=1 then '已退回' else c.weddingDeposit end as yajin,
+		c.weddingName,
+		CASE c.weddingStyle
+		WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,d.username from orderone a
+		left join wedding c on a.weddingId = c.Id
+		left join user d on a.userId=d.id,(SELECT @i:=0) AS idd
+		where returnStatus=1
+		<if test="username!=null and username!=''">
+		and d.username like '%${username}%'
+		</if>
+		<if test="retexpressNum != null and retexpressNum != ''">
+			AND a.orderNo like '%${retexpressNum}%'
+		</if >
+
+
+	</select>
+	<insert id="addBackwedding" parameterType="com.dress_rental.entities.ReturnWedding">
+		insert into returnwedding (
+		retexpressNum,orderId)
+		values
+		(#{retexpressNum,jdbcType=VARCHAR},#{orderId,jdbcType=INTEGER})
+	</insert>
+<!--	处理归还婚纱，退押金-->
+	<update id="upBackwedding" parameterType="com.dress_rental.entities.ReturnWedding">
+		update  orderone a set a.weddingDeposit=1
+        WHERE a.Id=#{iid,jdbcType=INTEGER}
+
+	</update>
+	<delete id="removeBackWeddingInfoByIds">
+		DELETE FROM orderone WHERE Id IN
+		<foreach collection="list" item="id" separator="," open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>婚纱在线租赁系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/jquery.min.js"></script>
+</head>
+<body class="layui-layout-body" onload="verifyuser()">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" >婚纱在线租赁系统后台</div>
+
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a  href="javascript:;">
+                    <img src="" id='userphoto' class="layui-nav-img">
+                    <span id='username'>Hh</span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="moduls/user/upd.jsp" target="option">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><input style="border: none;background:#23262e;color:#b3bbbd;cursor: pointer" type="submit" onclick="quit()"  value="退出登录" /></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">报表管理</a>
+                    <dl class="layui-nav-child ">
+                        <dd class="layui-nav-item layui-nav-itemed"><a href="back/reportShow.html" target="option" class="site-demo-active" data-type="tabAdd">图表展示</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="back/user.html" target="option" class="site-demo-active" data-type="tabAdd">用户信息管理</a></dd>
+<!--                        <dd><a href="main2.html" target="option" class="site-demo-active" data-type="tabAdd"><i class="layui-icon">&#xe621;</i>密码管理</a></dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item ">
+                    <a class="" href="javascript:;">婚纱管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="back/weddingList.html" target="option">婚纱信息管理</a></dd>
+                        <dd><a href="back/promotionList.html" target="option">爆款推荐管理</a></dd>
+                        <dd><a href="back/returnwedList.html" target="option">婚纱归还管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">订单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="back/order.html" target="option">租赁订单管理</a></dd>
+                    </dl>
+                </li>
+              <!--  <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="main.html" target="option" class="site-demo-active" data-type="tabAdd"><i class="layui-icon">&#xe621;</i>用户信息管理</a></dd>
+                        <dd><a href="main2.html" target="option" class="site-demo-active" data-type="tabAdd"><i class="layui-icon">&#xe621;</i>密码管理</a></dd>
+                    </dl>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+<!--layui-nav-itemed-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="height: 100%;width: 100%;">
+            <iframe id="option" name="option" src="back/reportShow.html" style="overflow: visible" scrolling="auto" frameborder="no" width="100%" height="100%"></iframe>
+        </div>
+    </div>
+   <!-- <div class="layui-footer">
+
+    </div>-->
+</div>
+<script src="layui/layui.js"></script>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element;
+    });
+    function  verifyuser() {
+        $.post("/getname",function(obj){
+            console.log(obj[0].photo);
+            $("#username").html(obj[0].username);
+            $("#userphoto").attr('src','/'+obj[0].photo);
+        },"json");
+
+    }
+    function quit(){
+        url = 'login.html'; //把当前页面的地址赋给变量 url
+        //分切变量 url 分隔符号为 "#"
+        if( url.indexOf("#") == -1){ //如果url后没有#
+            url += "#"; //加入 #
+            self.location.replace(url); //刷新页面
+        }
+    }
+</script>
+</body>
+</html>

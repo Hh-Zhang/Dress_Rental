@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>订单信息管理</title>
+  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/css/weddinglayui.css" type="text/css">
+</head>
+<body>
+<div class="layui-card-body ">
+	<div class="layui-inline layui-show-xs-block">
+		<input class="layui-input"  autocomplete="off" placeholder="请输入婚纱名" name="weddingName" id="searchone">
+	</div>
+	<div class="layui-inline layui-show-xs-block">
+		<input class="layui-input"  autocomplete="off" placeholder="请输入订单号" name="orderNo" id="searchtwo">
+	</div>
+	<div class="layui-inline layui-show-xs-block">
+		<select name="logisticsStatus" class="logisticsStatus" id="searchthree" lay-verify="required" lay-search="" id="searchthree">
+			<option value="">物流状态</option>
+			<option value="0">未发货</option>
+			<option value="1">已发货</option>
+			<option value="2">已签收</option>
+		</select>
+	</div>
+	<div class="layui-inline layui-show-xs-block">
+		<button class="layui-btn"  id="search" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+		<button class="layui-btn layui-btn-normal"  onclick="cleanBtn()"><i class="layui-icon"></i>清除</button>
+	</div>
+</div>
+<div class="layui-card-header">
+	<button class="layui-btn layui-btn-danger" id="delAll_btn"><i class="layui-icon"></i>批量删除</button>
+	<button class="layui-btn " id="add_btn" ><i class="layui-icon"></i>添加</button>
+</div>
+<table class="layui-hide" id="idtest" lay-filter="demo"></table>
+<!--物流状态-->
+<script type="text/html" id="titleTp1">
+	{{#  if(d.logisticsStatus === '已发货'){ }}
+	<span style="color: #55ad20;">{{ d.logisticsStatus }}</span>
+	{{#  } else if(d.logisticsStatus === '已签收') { }}
+	{{ d.logisticsStatus }}
+	{{#  } else { }}
+	<span style="color: red;">{{ d.logisticsStatus }}</span>
+	{{#  } }}
+</script>
+<!--归还状态-->
+<script type="text/html" id="titleTp2">
+	{{#  if(d.returnStatus === '已归还'){ }}
+	<span style="color: #55ad20;">{{ d.returnStatus }}</span>
+	{{#  } else { }}
+	<span style="color: #ff851a;">{{ d.returnStatus }}</span>
+	{{#  } }}
+</script>
+<!--进行处理-->
+<script type="text/html" id="barDemo">
+  {{#  if(d.logisticsStatus == '已发货'||d.logisticsStatus=='已签收'){ }}
+  <a class="layui-btn layui-btn-disabled" lay-event="" id="process1" style="width: 45px;height: 22px;font-size: 12px;padding-left:2px;line-height: 22px">已处理</a>
+  {{#  } else { }}
+  <a class="layui-btn layui-btn-xs" lay-event="edit" id="process">处理</a>
+  {{#  } }}
+  <a class="ltd-manage" lay-event="detail" title="查看详情"><i class="layui-icon">&#xe642;</i></a>
+  <a class="td-manage " title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+
+<script src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/backorder.js"></script>
+
+	<!--<script type="text/html" id="titleTp3">
+  		{{#  if(d.dealState === '已处理'){ }}
+  		  <span style="color: #55ad20;">{{ d.dealState }}</span>
+			{{#  } else { }}
+				<span style="color: blue;">{{ d.dealState }}</span>
+ 			 {{#  } }}
+</script>-->
+</body>
+</html>   

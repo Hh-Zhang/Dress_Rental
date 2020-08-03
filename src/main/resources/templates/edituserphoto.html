@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <img id="photo" name="photo" src="${img }/personmgr/avatar_url.jpg" width="130px" height="140px" onclick="$('#updateFileInput').click();"/>
+    <input id="avatar_file" type="file" style = "margin-left:auto;margin-right:auto;" accept="image/*" name="avatar" style="">
+    <img id="avatar_img" style="display:none;height: 85px;width: 150px;border-radius: 50%;margin-right: 20px;">
+    <input style="position:relative;margin-top: 40px;background-color: #36f;border: none;" type="submit" class="btn btn-success" id="tijiao" value="上传图片">
+    <input type="text" class="photo1" id="photo1">
+    <span id = "tip-msg" style="padding-top: 20px;"> </span>
+    <input id="reset-data" type="reset" value="Reset" style="display: none" />
+</div>
+<script>
+    $("body").append('<form id="uploadFileHiddenForm"><input type="file" name="file" id="updateFileInput" style="display:none;"/></form>');
+    $("#uploadFileHiddenForm").change(function(){
+        var formData = new FormData($('#uploadFileHiddenForm')[0]);
+        $.ajax({                        //发请求给接口
+            cache:false,
+            contentType: false,
+            processData: false,
+            url:U('upload/avatarUpload'),    //接口地址
+            type:'POST',
+            enctype:'multipart/form-data',
+            data:formData,
+            dataType:'JSON',
+            success:function (data) {
+                if (data.data.imgs.length > 0) {
+                    //上存成功
+                    var url = data.data.imgs[0]["thumbnail_url"];
+                    $("#photo").attr("src", url);
+                    updateHeadImg(url);
+                }
+            }
+        });
+    });
+
+    $('#tijiao').click(function () {
+        $.ajax({
+            url:"/addUserPhoto",
+            success:function (res) {
+                $('#photo').val(res.data.src);
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dress_rental.dao.ReportDao">
+<select id="qryReportList" parameterType="java.util.Map" resultType="java.util.Map">
+select year(orderDate) Year,month(orderDate) Month,
+count(*) totalNumber,
+SUM(topri) totalPrice
+from orderone
+where 1=1
+<if test="year !=null and year !=''">
+  and year(orderDate)=#{year}
+</if>
+<if test="month !=null and month !=''">
+    and month(orderDate)=#{month}
+</if>
+group by year(orderDate),
+month(orderDate)
+</select>
+</mapper>

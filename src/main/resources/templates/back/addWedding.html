@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>个人资料</title>
+    <link href="/layui/css/layui.css" rel="stylesheet" />
+    <script src="/layui/layui.js" charset="utf-8"></script>
+
+</head>
+<body>
+<form class="layui-form" charset="utf-8" target="_parent"
+      enctype="multipart/form-data">
+    <div class="layui-form-item" style="margin-top:20px;">
+        <label class="layui-form-label">婚纱名</label>
+        <div class="layui-input-inline">
+            <input type="text" id="weddingName" name="weddingName" required lay-verify="required"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">婚纱风格</label>
+        <div class="layui-input-inline">
+            <select id="weddingStyle" name="weddingStyle" lay-verify="required" lay-search="">
+                <option value="0">复古</option>
+                <option value="1">时尚</option>
+                <option value="2">优雅</option>
+                <option value="3">公主</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">租赁价格</label>
+        <div class="layui-input-inline">
+            <input type="text" id="weddingPrice" name="weddingPrice" required lay-verify="required"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">押金（元）</label>
+        <div class="layui-input-inline">
+            <input type="text" id="weddingDeposit" name="weddingDeposit" required lay-verify="required"
+                   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-upload">
+        <label class="layui-form-label">婚纱图片:</label>
+        <div class="layui-upload layui-input-block">
+            <img style="width:197px;height:197px;margin-left: 4%;margin-top: 5%;" id="pic" src="/'+data.weddingPicture+'">
+            <input type="hidden" id="weddingPicture" name="weddingPicture" required lay-verify="required" />
+            <button type="button" class="layui-btn layui-btn-primary"
+                    id="fileBtn">
+                <i class="layui-icon">&#xe67c;</i>选择图片
+            </button>
+            <button type="button" class="layui-btn layui-btn-warm"
+                    id="uploadBtn">开始上传</button>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <label class="layui-form-label">爆款推荐</label>
+        <div class="layui-input-inline">
+            <select id="promotion" name="promotion"  lay-verify="required" lay-search="">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 20px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="btn1" lay-submit data-type="fSubmit" lay-filter="formDemo">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+<script type="text/javascript">
+    layui.use(['form', 'upload'],function(){
+        var upload = layui.upload;
+        var $ = layui.jquery;
+        var form = layui.form;
+        upload.render({
+            elem: '#fileBtn'
+            ,url: '/addWeddingPhoto'
+            ,accept: 'file'
+            ,auto: false
+            ,bindAction: '#uploadBtn'
+            ,before: function(obj){
+                //返回地址，显示图片
+                obj.preview(function(index, file, result){
+                    $('#pic').attr('src', result); //图片链接
+                });
+            }
+            ,done: function(res){
+                $("[name=weddingPicture]").val(res.data.src);
+            }
+        });
+
+
+        $('#btn1').on('click',function () {
+            var weddingName,weddingStyle,weddingPrice,weddingDeposit,weddingPicture,promotion;
+            weddingName=$("#weddingName").val();
+            console.log(weddingName);
+            weddingStyle=$("#weddingStyle").val();
+            weddingPrice=$("#weddingPrice").val();
+            weddingDeposit=$("#weddingDeposit").val();
+            weddingPicture=$("#weddingPicture").val();
+            promotion=$("#promotion").val();
+            var str={ "weddingName":weddingName,
+                "weddingStyle":weddingStyle,
+                "weddingPrice":weddingPrice,
+                "weddingDeposit":weddingDeposit,
+                "weddingPicture":weddingPicture,
+                "promotion":promotion};
+            $.ajax({
+                type:'post',
+                url:'/addWeddingInfo',
+                contentType:'application/json',
+                cache:false,
+                data:JSON.stringify(str),
+                dataType:'json',
+                success:function () {
+                    layer.msg('添加成功',{icon:1,time:2000},function(){
+                        var index=parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        window.parent.location.reload();//刷新父窗口*!/
+                    });
+                },
+                error:function(data){
+                    layer.msg('添加失败');
+                    layer.alert(JSON.stringify(data));
+                }
+            });
+            return false;
+        });
+        /*var active={
+            fSubmit:function () {
+              /!*  table.reload('reloadWedding',{
+                    method : 'post',
+                    contentType:'application/json',
+                    url:'/addWeddingSuccess',
+                    where:{
+                        weddingName:weddingName,
+                        weddingStyle:weddingStyle,
+                        weddingPrice:weddingPrice,
+                        weddingPurchase:weddingPurchase,
+                        weddingAdd:weddingAdd,
+                        faddish:faddish
+                    }
+
+                });*!/
+              $.ajax({
+                  type:'post',
+                  url:'/addWeddingSuccess',
+                  contentType:'application/json',
+                  cache:false,
+                  data:JSON.stringify(str),
+                  dataType:'json',
+                  success:function () {
+                      layer.msg('添加成功',{icon:1,time:2000},function(){
+                          var index=parent.layer.getFrameIndex(window.name);
+                          parent.layer.close(index);
+                          window.parent.location.reload();//刷新父窗口*!/
+                      });
+                  },
+                  error:function(data){
+                      layer.msg('添加失败');
+                      layer.alert(JSON.stringify(data));
+                  }
+                });
+              return false;
+            }
+        };
+        $('#btn1').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });*/
+    });
+</script>
+</html>

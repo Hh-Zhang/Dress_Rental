@@ -1,0 +1,268 @@
+.trueland{
+    background-image: url("../images/ture_bg.png");
+    background-color: @foot_color;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    .trueland_main{
+        max-width:1240px;
+        padding:2% 0px;
+        text-align: center;
+        margin: auto;
+        width:80%;  
+        .tr_title1{
+            font-family:"Baskerville Old Face";
+            font-size:24px;
+            color: @sub_color;
+            font-weight: 700;   
+        } 
+        .tr_img{
+            margin:1% auto;   
+        }
+        .tr_title2{
+            font-size:12px;
+            color: #727272;
+            @media (max-width: 991px){
+                display: none;  
+            }   
+        }
+        .tr_title3{
+            font-size:14px;
+            color: #a6a6a6;
+            padding:1%;  
+            @media (max-width: 991px){
+                display: none;  
+            }  
+        }
+        .tr_title4{
+            padding:3%;
+            color:@sub_color;
+            font-weight: 500;   
+            @media(max-width:1240px){
+                 padding: 2%;
+            }
+        }
+        .submit{
+            border: 1px solid @theme_color;
+            width: 130px;
+            margin: 0 auto;
+            text-align: center;
+            line-height:30px; 
+            &:hover{
+                background: @theme_color;    
+            }  
+            a{
+                color: #fff;
+                font-size: 15px;
+                font-family: "Baskerville Old Face";
+                text-decoration: none;   
+            }
+        } 
+        .trueland_bot{
+            width:100%;
+            margin-top:110px; 
+            @media (max-width: 1560px) {
+                width: 100%;
+                margin-top:35px;
+            }
+            @media (max-width: 991px){
+                margin-top:57px;   
+            }
+            @media (max-width: 640px) {
+                margin-top: 20px;
+            }
+            a{
+                color: #e4ddd7;
+                font-size: 12px;
+                font-family: "Baskerville Old Face";
+                text-decoration: none;
+                cursor: pointer;    
+            }  
+            ul{
+                li{
+                    width:25%;
+                    float: left;
+                    color: #e4ddd7;
+                    height:155px;
+                    overflow: hidden; 
+                    @media (max-width: 1240px){
+                        width:33.3%;
+                        float: left;
+                        color: #fff;   
+                    }
+                     @media (max-width: 991px){
+                         width: 50%;
+                     }
+                      @media (max-width: 640px) {
+                          width:100%;
+                      }
+                       @media(max-width:640px){
+                          height: auto;
+                        }
+                    
+                    img{
+                        min-height:155px;
+                        @media (max-width: 991px){
+                            width: 100%;
+                            height: 100%;
+                        }
+                        @media(max-width:640px){
+                          min-height: auto;
+                        }
+                    }  
+                    .li1_left{
+                        background-color:@theme_color;
+                        padding:25px 7px;
+                        width:20%;
+                        float: left;
+                        .time_yue{
+                            font-size: 18px;
+                            font-family: 宋体;
+                        }  
+                        .time_nian{
+                            font-size: 10px;
+                            font-family: 宋体;
+                            border-bottom:1px solid #fff;
+                        } 
+                       
+                    }
+                    .li1_right{
+                        width:80%;
+                        float: right;   
+                    }
+                }
+                .li_bg1{
+                    background-color: @theme_color;
+                    padding: 20px; 
+                    @media(max-width:480px){
+                        padding: 7px;
+                    }
+                    .li2_left{
+                        float: left;
+                        width:20%;
+                        .xian{
+                            border-left:1px solid #e4ddd7;
+                            height:81px;
+                            margin-left:25px;
+                            @media (max-width: 640px) {
+                                margin-left:40px;
+                            }
+                            @media (max-width: 480px) {
+                                margin-left:32px;
+                            }
+                            @media (max-width: 400px) {
+                                margin-left:26px;
+                            }
+                         
+                            
+                        }
+                    }
+                    .li2_right{  
+                        float: right;
+                        width:80%;
+                      
+                       
+                        .ti_p1{
+                            
+                        }
+                        .ti_p2{
+                            font-size:10px;
+                              
+                        }
+                        .view{
+                            font-size: 10px;
+                            font-family: 宋体;
+                            border-bottom:1px solid #e4ddd7;
+                            margin-right:-50%;
+                        }
+                        
+                    }
+                      
+                }
+                .li_bg2{
+                    background-color: #222222;
+                    padding: 20px;
+                    @media(max-width:480px){
+                        padding: 10px;
+                    }
+                    .bg2_left{
+                        float: right;
+                        width:20%;
+                        .time_yue{
+                            color:@sub_color;
+                        } 
+                        .xian{
+                            border-left:1px solid @sub_color;
+                            height:81px;
+                             margin-left:25px;
+                             @media (max-width: 640px) {
+                                margin-left:40px;
+                            }
+                            @media (max-width: 480px) {
+                                margin-left:32px;
+                            }
+                            @media (max-width: 400px) {
+                                margin-left:26px;
+                            }
+                        }
+                    }
+                    .bg2_right{
+                        float: left;
+                        width: 80%; 
+                        .ti_p1{
+                            color: @sub_color;   
+                        }  
+                        .ti_p2{
+                            color:#555555;
+                            font-size:10px;   
+                        }
+                        .view{
+                            margin-right: 50%;   
+                            border-bottom:1px solid #e4ddd7;
+                        }
+                    }
+                }
+                .li_bg3{
+                    background-color: @foot_color;
+                    position: relative;
+                    .li_bg3_con{
+                        background-color: #222222;
+                        width:25%;
+                        height:55%;
+                        right:0px;
+                        position: absolute;
+                        right: 0px;
+                        top:20%;
+                    }
+                    .li_bg3_yw{
+                        position: absolute;
+                        right:23%;
+                        top:20%;
+                        .view{
+                            font-size: 10px;
+                            font-family: 宋体;
+                            border-bottom:1px solid #e4ddd7;
+                            margin-right:-50%;
+                        }
+                    }
+                    .li_bg3_hang{
+                        line-height: 3;
+                        position: absolute;
+                        top: 45%;
+                        right: 3%;
+                         .time_yue{
+                           margin-left: 20px;
+                        }
+                    }
+                    .reorder{
+                        position: absolute;
+                        right:0px;
+                        top:74%;  
+                        color: @sub_color;
+                    }
+
+                }
+                
+            }
+        }
+    }
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+<form class="layui-form layui-col-space5">
+    <div class="layui-inline layui-show-xs-block" >
+        <input class="layui-input" autocomplete="off" placeholder="请输入登录名" name="start" id="username1"></div>
+    <div class="layui-inline layui-show-xs-block">
+        <input class="layui-input" autocomplete="off" placeholder="请输入用户名" name="end" id="realname1"></div>
+<div class="layui-inline layui-show-xs-block">
+    <input type="text" name="username" placeholder="请输入手机号" autocomplete="off" class="layui-input" id="phonenum1"></div>
+<div class="layui-inline layui-show-xs-block">
+    <button class="layui-btn" lay-submit="" lay-filter="sreach" id="searchBtn" >
+        <i class="layui-icon">&#xe615;</i></button>
+</div>
+</form>
+
+<div class="layui-btn-group demoTable">
+    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+    <button class="layui-btn" data-type="isAll">验证是否全选</button>
+    <button class="layui-btn layui-btn-danger" data-type="getAllDel"><i class="layui-icon"></i>批量删除</button>
+    <button class="layui-btn" onclick="layer.open({type: 2,title:'添加用户',content:'/userAdd.html',area: ['400px', '300px']})"><i class="layui-icon"></i>添加</button>
+</div>
+
+<table class="layui-table" lay-data="{ height:500,url:'/selectAllUsers', page:true, id:'idTest'}" lay-filter="demo">
+    <thead>
+    <tr>
+        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+        <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+        <th lay-data="{field:'username', width:100}">账号</th>
+        <th lay-data="{field:'realname', width:100}">用户名</th>
+        <th lay-data="{field:'sex', width:80, sort: true,templet: function(d){if(d.sex == 1){return '男'}else{return '女'}}}">性别</th>
+        <th lay-data="{field:'phonenum', width:180}">手机号</th>
+        <th lay-data="{field:'photo', width:260,templet:#photo}">个人照片</th>
+        <th lay-data="{field:'type', width:100, sort: true,templet: function(d){if(d.type == 0){return '管理员'}else{return '普通用户'}}}">用户类型</th>
+
+        <th lay-data="{field:'status', width:100}">状态</th>
+        <th lay-data="{field:'receiveAdd', width:135, sort: true}">收获地址</th>
+        <th lay-data="{field:'addTime', width:80, sort: true, fixed: 'right'}">添加时间</th>
+        <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+    </tr>
+    </thead>
+</table>
+<script type="text/html" id="photo">
+    <div STYLE="width:91px "><img src="/{{ d.photo}}"></div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script src="/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        var $ = layui.$;
+        //按关键字查询
+        $('#searchBtn').on('click', function() {
+            var username=$('#username1').val();
+            var realname=$('#realname1').val();
+            var phonenum=$('#phonenum1').val();
+            console.log(phonenum);
+            console.log("查询按钮");
+            table.reload('idTest', {
+                method : 'post',
+                contentType:'application/json',
+                url:'/selectAllUsers',
+                where : {
+                    username :username,
+                    realname :realname,
+                    phonenum :phonenum
+                },
+                page : {
+                    curr :1
+                }
+            });
+            return false;
+        });
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+        });
+
+        var active = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            ,getCheckLength: function(){ //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.msg('选中了：'+ data.length + ' 个');
+            }
+            ,isAll: function(){ //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            }
+            //   批量删除
+            ,getAllDel: function () {
+                var checkStatus=table.checkStatus('idTest')
+                    ,data=checkStatus.data;
+                idList=[];
+                data.forEach(function(n,i){
+                    idList.push(n.id);
+                });
+                console.log(idList);
+                if(idList!=''){
+                    layer.confirm('确定删除所选项吗？',function (index) {
+                        $.ajax({
+                            url: '/deleteUsersById',
+                            type:'get',
+                            dataType:'json',
+                            data:"id="+idList,
+                            success:function (data,statusText) {
+                                if(data.code==='0'){
+                                    layer.msg('删除成功');
+                                    table.reload('idTest',{});
+                                }else{
+                                    layer.msg('删除失败');
+                                }
+                            },
+                            'error':function () {
+                                layer.msg('系统错误');
+                            }
+                        })
+                    })
+                }else{
+                    layer.tips('请选择需要删除的行',$('#batchDel'),{
+                        tips:[3,'#5fb878']
+                    })
+                }
+
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+       /* var $=layui.$,active={
+
+
+        }*/
+    });
+    /*
+    function delAll(argument) {
+        var ids = [];
+
+        // 获取选中的id
+        $('demo').each(function(index, el) {
+            if($(this).prop('checked')){
+                console.log($(this).val())
+                ids.push($(this).val().id);
+                // console.log(ids);
+            }
+        });
+
+        layer.confirm('确认要删除吗？'+ids.toString(),function(index){
+            //捉到所有被选中的，发异步进行删除
+            // layer.msg('删除成功', {icon: 1});
+            // $(".layui-form-checked").not('.header').parents('tr').remove();
+            $.ajax({
+                url: '/deleteUsersById',
+                type:'get',
+                dataType:'json',
+                data:"id="+ids,
+                success:function (data) {
+                    if(data.code==='0'){
+                        layer.msg('删除成功');
+                        table.reload('test',{});
+                    }else{
+                        layer.msg('删除失败');
+                    }
+                },
+                'error':function () {
+                    layer.msg('系统错误');
+                }
+            })
+        });
+    }*/
+</script>
+
+</body>
+</html>

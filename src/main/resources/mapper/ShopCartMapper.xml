@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dress_rental.dao.ShopCartDao">
+<select id="qryshopcartList"  resultType="java.util.Map">
+  select (@i:=@i+1) idd,
+        a.Id,a.rentalDays,a.userId,a.weddingId,
+        b.weddingName, CASE b.weddingStyle
+        WHEN 0 THEN '复古'
+		WHEN 1 THEN '时尚'
+		WHEN 2 THEN '优雅'
+		ELSE '公主'
+		END AS weddingStyle,
+        b.weddingDeposit,b.weddingPrice,b.weddingPicture
+ from shopcart a left join wedding b on a.weddingId=b.Id
+ left join user c on a.userId=c.id
+ ,(SELECT @i:=0) as idd where a.userId=#{id}
+</select>
+    <insert id="addtoShopCart" parameterType="com.dress_rental.entities.ShopCart">
+        insert into shopcart(userId,weddingId,rentalDays)
+        values (#{userId},#{weddingId},#{rentalDays})
+    </insert>
+    
+    
+</mapper>
