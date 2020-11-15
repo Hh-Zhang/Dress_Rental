@@ -36,7 +36,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 super.addInterceptors(interceptorRegistry);
                 //SpringBoot已经做好了静态资源映射
                 interceptorRegistry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")//拦截所有
-                        .excludePathPatterns("/static/**", "/toLogin", "/login.html", "/Login", "/register.html", "/index.html", "/case.html", "/qryprepromotion", "/case_show.html", "/qrypreWedding","/getname");//排除几个不拦截的请求
+                        .excludePathPatterns("/static/**", "/toLogin", "/login.html", "/Login","/Register", "/register.html", "/index.html", "/case.html", "/qryprepromotion", "/case_show.html", "/qrypreWedding","/getname");//排除几个不拦截的请求
 
             }
 

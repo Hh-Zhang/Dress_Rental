@@ -2,6 +2,7 @@ package com.dress_rental.controller;
 
 import com.dress_rental.entities.User;
 import com.dress_rental.service.UserService;
+import com.dress_rental.util.MD5Utils;
 import com.dress_rental.util.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -53,14 +54,17 @@ private UserService userService;
     }
 
     //进行注册
-    @RequestMapping("/Register")
+    @RequestMapping(value = "/Register",method = RequestMethod.POST)
     @ResponseBody
     public Result addCustomer(User user){
+        user.setPassword(MD5Utils.md5(user.getPassword()));
+        System.out.println(user.getPassword());
         int i=userService.addCustomer(user);
         if(i>0){
-            return new Result().failure(-1,"注册失败");
+            return new Result().success("注册成功") ;
         }
-        return new Result().success("注册成功") ;
+        return new Result().failure(-1,"注册失败");
+
     }
     //进行登录
     @RequestMapping("/Login")
